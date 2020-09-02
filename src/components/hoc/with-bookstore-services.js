@@ -1,16 +1,18 @@
 import React from 'react';
 
-import { BookstoreServiceConsumer } from '../bookstore-service-context';
+import { BookstoreServicesConsumer } from '../bookstore-service-context';
 
 
-const withBookstoreServices = (params) => (View) => (
-    <BookstoreServiceConsumer>
-        {
-            (bookstoreServices) => (
-                <View { ...params } getData={ bookstoreServices }/>
-            )
-        }
-    </BookstoreServiceConsumer>
+const withBookstoreServices = () => (View) => (
+    (params) => (
+        <BookstoreServicesConsumer>
+            {
+                (bookstoreServices) => (
+                    <View { ...params } getData={ bookstoreServices }/>
+                )
+            }
+        </BookstoreServicesConsumer>
+    )
 )
 
 export default withBookstoreServices;
