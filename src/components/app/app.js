@@ -2,7 +2,7 @@ import React from 'react';
 import Spinner from '../spinner';
 import { withBookstoreServices } from '../hoc'
 
-const App = () => {
+const App = ({bookstoreService}) => {
     return (
         <div>
             <Spinner />

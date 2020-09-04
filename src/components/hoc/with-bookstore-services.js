@@ -8,7 +8,7 @@ const withBookstoreServices = () => (View) => (
         <BookstoreServicesConsumer>
             {
                 (bookstoreServices) => (
-                    <View { ...params } getData={ bookstoreServices }/>
+                    <View { ...params } bookstoreService={ bookstoreServices }/>
                 )
             }
         </BookstoreServicesConsumer>
