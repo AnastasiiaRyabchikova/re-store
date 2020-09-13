@@ -7,7 +7,7 @@ const Spinner = () => {
     useEffect(() => {
         const timer = setInterval(() => {
           setProgress((prevProgress) => (prevProgress >= 100 ? 0 : prevProgress + 10));
-        }, 800);
+        }, 80);
     
         return () => {
           clearInterval(timer);

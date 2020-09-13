@@ -53,10 +53,10 @@ export default function ShoppingCartTable() {
                                     <TableCell align="center">{price}</TableCell>
                                     <TableCell align="center">
                                         <Button>
-                                            <AddCircleOutlineOutlinedIcon color="success"/>
+                                            <AddCircleOutlineOutlinedIcon color="action"/>
                                         </Button>
                                         <Button>
-                                            <IndeterminateCheckBoxIcon color="warning"/>
+                                            <IndeterminateCheckBoxIcon color="disabled"/>
                                         </Button>
                                         <Button>
                                             <DeleteForeverOutlinedIcon color="error"/>
