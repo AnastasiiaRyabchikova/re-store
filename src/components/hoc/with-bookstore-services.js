@@ -3,7 +3,7 @@ import React from 'react';
 import { BookstoreServicesConsumer } from '../bookstore-service-context';
 
 
-const withBookstoreServices = () => (View) => (
+const withBookstoreService = () => (View) => (
     (params) => (
         <BookstoreServicesConsumer>
             {
@@ -15,4 +15,4 @@ const withBookstoreServices = () => (View) => (
     )
 )
 
-export default withBookstoreServices;
+export default withBookstoreService;

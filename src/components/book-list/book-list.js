@@ -3,25 +3,26 @@ import './book-list.css';
 import React, { Component } from 'react';
 import BookListItem from '../book-list-item';
 import { connect } from 'react-redux';
-import withBookstoreService from '../hoc/with-bookstore-services';
+import { withBookstoreService } from '../hoc';
+import { booksLoaded } from '../../actions';
+import { compose } from '../../utils'; 
+
+
+
 class BookList extends Component {
     componentDidMount() {
         const { bookstoreService } = this.props;
-        console.log('bookstoreService: ', bookstoreService);
         const data = bookstoreService.getBooks();
-        console.log(data);
-
         this.props.booksLoaded(data);
     }
     render() {
         const { books } = this.props;
-        console.log(books);
         return (
-            <ul>
+            <ul className="book-list">
                 {
                     books.map((book) => {
                         return (
-                            <li key={book.id}>
+                            <li key={book.id} className="book-list__item">
                                 <BookListItem book={book}/>
                             </li>
                         )
@@ -36,17 +37,11 @@ const mapStateToProps = ( { books } ) => {
     return { books }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
-    return {
-        booksLoaded: (newBooks) => {
-            dispatch({
-                type: 'BOOKS_LOADED',
-                payload: newBooks
-            });
-        }
-    }
+const mapDispatchToProps = {
+    booksLoaded
 }
 
-export default withBookstoreService()(
-    connect(mapStateToProps, mapDispatchToProps)(BookList)
-    );
+export default compose(
+    withBookstoreService(),
+    connect(mapStateToProps, mapDispatchToProps)
+)(BookList);

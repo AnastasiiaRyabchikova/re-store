@@ -1,0 +1,9 @@
+.shopping-cart-table__total-wrp {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.shopping-cart-table__total {
+    margin-right: 2rem !important;
+}
