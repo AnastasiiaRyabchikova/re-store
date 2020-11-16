@@ -8,11 +8,14 @@
 
 .header__logo {
     font-size: 1.5rem;
+    text-decoration: none;
+    color: inherit;
 }
 
 .header__cart {
     display: flex;
     align-items: center;
+    text-decoration: none;
 }
 
 .header__cart-wrp {
