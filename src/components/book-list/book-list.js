@@ -11,17 +11,10 @@ import { compose } from '../../utils';
 
 class BookList extends Component {
     componentDidMount() {
-        const { bookstoreService, booksLoaded, booksRequasted, booksError } = this.props;
-        booksRequasted();
-        bookstoreService
-            .getBooks()
-            .then((data) => booksLoaded(data))
-            .catch((error) => booksError(error));
+        this.props.fetchBooks();
     }
     render() {
         const { books, loading, error } = this.props;
-        console.log({books, loading, error});
-        console.log(ErrorIndicator);
         if (loading) return <Spinner />;
         if (error) return <ErrorIndicator />;
         return (
@@ -44,10 +37,17 @@ const mapStateToProps = ( { books, loading, error } ) => {
     return { books, loading, error }
 }
 
-const mapDispatchToProps = {
-    booksLoaded,
-    booksRequasted,
-    booksError,
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchBooks: () => {
+            const { bookstoreService } = ownProps;
+            dispatch(booksRequasted());
+            bookstoreService
+                .getBooks()
+                .then((data) => dispatch(booksLoaded(data)))
+                .catch((error) => dispatch(booksError(error)));
+        }
+    }
 }
 
 export default compose(
