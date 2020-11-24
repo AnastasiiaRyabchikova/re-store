@@ -1,8 +1,5 @@
 import './book-list-item.css';
-
 import React from 'react';
-
-
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -25,8 +22,8 @@ const useStyles = makeStyles({
   }
 });
 
-export default function BookListItem({book}) {
-    const { title, author, price } = book;
+export default function BookListItem({ book, onAddToCard }) {
+  const { title, author, price } = book;
   const classes = useStyles();
 
   return (
@@ -50,7 +47,11 @@ export default function BookListItem({book}) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-      <Button variant="contained" color="primary"> Add to cart </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={onAddToCard}
+      > Add to cart </Button>
       </CardActions>
     </Card>
   );
