@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartItem from './shopping-cart-item';
 
-function ShoppingCartTable({ items, total, onIncrease, onDecrease, onDelete }) {
+function ShoppingCartTable({ items, onIncrease, onDecrease, onDelete }) {
     const totalCalc = items.reduce((accum, { price, count }) => (accum + count * price), 0);
     return (
         <div className="shopping-cart-table"> 

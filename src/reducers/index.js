@@ -34,14 +34,19 @@ const reducer = (state = initialState, action) => {
             };
         case 'BOOK_ADD_TO_CART' :
             const bookId = action.payload;
-            const book = state.books.find(book => book.id === bookId);
-            const itemInBasket = {...book, count: 1};
+            const basketItems = [ ...state.basketItems ];
+            let indexInBasket = basketItems.findIndex(({ id }) => id === bookId);
+            if (indexInBasket > -1) {
+                const item = basketItems[indexInBasket];
+                basketItems[indexInBasket].count += 1;
+            }  else {
+                const book = state.books.find(({ id }) => id === bookId);
+                const newItem = {...book, count: 1};
+                basketItems.push(newItem);
+            }
             return {
                 ...state,
-                basketItems: [
-                    ...state.basketItems,
-                    itemInBasket,
-                ],
+                basketItems,
             }
         default : 
             return state;
