@@ -53,9 +53,9 @@ function ShoppingCartTable({ items, onIncrease, onDecrease, onDelete }) {
     )
 }
 
-const mapStateToProps = ({ basketItems, basketTotal }) => {
+const mapStateToProps = ({ shopingCart: { cartItems, basketTotal } }) => {
     return {
-        items: basketItems,
+        items: cartItems,
         total: basketTotal,
     }
 }
