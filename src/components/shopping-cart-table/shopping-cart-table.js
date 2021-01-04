@@ -9,6 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
 import ShoppingCartItem from './shopping-cart-item';
+import { bookAddToCart, bookRemoveFromCart, bookDecrease } from '../../actions';
+console.log(bookAddToCart);
 
 function ShoppingCartTable({ items, onIncrease, onDecrease, onDelete }) {
     const totalCalc = items.reduce((accum, { price, count }) => (accum + count * price), 0);
@@ -58,10 +60,10 @@ const mapStateToProps = ({ basketItems, basketTotal }) => {
     }
 }
 
-const mapDispathToProps = () => ({
-    onIncrease: (id) => console.log(`Increase ${id}`),
-    onDecrease: (id) => console.log(`Decrease ${id}`),
-    onDelete: (id) => console.log(`Delete ${id}`),
+const mapDispathToProps = (dispatch) => ({
+    onIncrease: (id) => dispatch(bookAddToCart(id)),
+    onDecrease: (id) => dispatch(bookDecrease(id)),
+    onDelete: (id) => dispatch(bookRemoveFromCart(id)),
 })
 
 export default connect(mapStateToProps, mapDispathToProps)(ShoppingCartTable);

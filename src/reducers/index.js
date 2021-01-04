@@ -6,6 +6,36 @@ const initialState = {
     basketTotal: 1400,
 };
 
+const updateOrderItems = (state, goodId, value) => {
+    const items = state.basketItems;
+    let indexInBasket = state.basketItems.findIndex(({ id }) => id === goodId);
+    let newListOfItems = [];
+    if (indexInBasket > -1) {
+        newListOfItems = [
+            ...items.slice(0, indexInBasket),
+            {
+                ...items[indexInBasket],
+                count: items[indexInBasket].count + value,
+            },
+            ...items.slice(indexInBasket+1),
+        ];
+    } else {
+        const newItemIndex = state.books.findIndex(({ id }) => id === goodId);
+        newListOfItems = [
+            ...items,
+            {
+                ...state.books[newItemIndex],
+                count: 1,
+            }
+        ];
+    }
+    console.log({newListOfItems});
+    return {
+        ...state,
+        basketItems: newListOfItems.filter(({ count }) => count > 0),
+    };
+};
+
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
@@ -33,20 +63,14 @@ const reducer = (state = initialState, action) => {
                 error: action.payload
             };
         case 'BOOK_ADD_TO_CART' :
-            const bookId = action.payload;
-            const basketItems = [ ...state.basketItems ];
-            let indexInBasket = basketItems.findIndex(({ id }) => id === bookId);
-            if (indexInBasket > -1) {
-                const item = basketItems[indexInBasket];
-                basketItems[indexInBasket].count += 1;
-            }  else {
-                const book = state.books.find(({ id }) => id === bookId);
-                const newItem = {...book, count: 1};
-                basketItems.push(newItem);
-            }
+            return updateOrderItems(state, action.payload, 1);
+        case 'BOOK_DECREASE' :
+            return updateOrderItems(state, action.payload, -1);
+
+        case 'BOOK_REMOVE_FROM_CART' :
             return {
                 ...state,
-                basketItems,
+                basketItems: [...state.basketItems].filter(({ id }) => id !== action.payload),
             }
         default : 
             return state;
