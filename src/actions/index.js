@@ -3,11 +3,10 @@ export const booksLoaded = (newBooks) => ({
     payload: newBooks
 });
 
-export const booksRequasted = () => ({ type: 'FETCH_BOOKS_REQUAST'});
 export const booksError = (error) => ({ type: 'FETCH_BOOKS_FAILURE', payload: error });
 
 export const fetchBooks = (bookstoreService, dispatch) => () => {
-    dispatch(booksRequasted());
+    dispatch('FETCH_BOOKS_REQUAST');
     bookstoreService
         .getBooks()
         .then((data) => dispatch(booksLoaded(data)))
