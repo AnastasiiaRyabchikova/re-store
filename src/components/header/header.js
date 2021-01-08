@@ -11,8 +11,8 @@ const Header = ({numitems, total}) => (
             <Link to="/cart" className="header__cart">
                 <ShoppingCartIcon color="primary"/>
                 <div className="header__cart-wrp">
-                    <span>{numitems} items</span>
-                    <span>{total}$</span>
+                    <span>{numitems || 0} items</span>
+                    <span>{total || 0}$</span>
                 </div>
             </Link>
         </header>

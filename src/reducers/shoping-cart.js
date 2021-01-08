@@ -10,7 +10,7 @@ const updateOrderItems = (state, goodId, value) => {
                 count: cartItems[indexInBasket].count + value,
             },
             ...cartItems.slice(indexInBasket+1),
-        ];
+        ].filter(({ count }) => count > 0);
     } else {
         const newItemIndex = books.findIndex(({ id }) => id === goodId);
         newListOfItems = [
@@ -22,7 +22,9 @@ const updateOrderItems = (state, goodId, value) => {
         ];
     }
     return {
-        cartItems: newListOfItems.filter(({ count }) => count > 0),
+        cartAmount: newListOfItems.reduce((accum, { count }) => (accum + count), 0),
+        cartItems: newListOfItems,
+        cartTotal: newListOfItems.reduce((accum, { price, count }) => (accum + count * price), 0),
     };
 };
 

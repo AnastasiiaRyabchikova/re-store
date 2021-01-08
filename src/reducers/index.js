@@ -9,7 +9,7 @@ const initialState = {
     },
     shopingCart: {
         cartItems: [],
-        total: 1400,
+        total: 0,
     },
 };
 

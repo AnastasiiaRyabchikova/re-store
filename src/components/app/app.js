@@ -4,11 +4,10 @@ import { connect } from 'react-redux';
 
 import { Route, Switch } from 'react-router-dom';
 import { HomePage, CartPage } from '../pages';
-const App = ({ items }) => {
-    const totalCalc = items.reduce((accum, { price, count }) => (accum + count * price), 0);
+const App = ({ cartTotal, cartAmount }) => {
     return (
         <React.Fragment>
-            <Header numitems={items.length} total={totalCalc}/>
+            <Header numitems={cartAmount} total={cartTotal}/>
             <Switch>
                 <Route path="/" component={HomePage} exact/>
                 <Route path="/cart" component={CartPage} />
@@ -17,10 +16,11 @@ const App = ({ items }) => {
     )
 }
 
-const mapStateToProps = ({ shopingCart: { cartItems } }) => {
+const mapStateToProps = ({ shopingCart: { cartAmount, cartTotal } }) => {
     return {
-        items: cartItems,
-    }
+        cartTotal,
+        cartAmount,
+    };
 };
 
 export default connect(mapStateToProps)(App);
