@@ -47,7 +47,7 @@ function ShoppingCartTable({ items, onIncrease, onDecrease, onDelete }) {
             </TableContainer>
             <div className="shopping-cart-table__total-wrp">
                 <Typography className="shopping-cart-table__total" gutterBottom variant="h6" component="div" >Total: </Typography>
-                <Typography gutterBottom variant="h6" component="div" >{totalCalc}</Typography>
+                <Typography gutterBottom variant="h6" component="div" >{totalCalc}$</Typography>
             </div>
         </div>
     )
